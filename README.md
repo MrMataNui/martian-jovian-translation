@@ -1,0 +1,1 @@
+# Conlang-Translation-Table
