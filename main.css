@@ -1,13 +1,7 @@
 /* the styles for the html elements */
-html {
-}
-body {
-	margin: 0 auto;
-	/*font-family: Arial, Helvetica, serif;*/
-}
+body {margin: 0 auto;}
 main {
 	margin: 2em auto 0;
-/*	width: 50%;*/
 	float: right;
 	width: 80%;
 	padding-bottom: 1.5em;
@@ -19,7 +13,7 @@ footer {
 	border-top: 2px solid black;
 }
 footer p {
-	/* text-align: center; */
+	text-align: center;
 	font-size: 110%;
 	margin: 1em 0;
 }
@@ -28,21 +22,11 @@ footer p {
 	margin: 0;
 	padding: .5em 0 .25em;
 }
-h2 {
-	font-size: 120%;
-	margin: 0;
-	padding: .25em 0 .5em;
-}
-h3 {
-	font-size: 120%;
-	margin: 0;
-	padding: .25em 0 .5em;
-}
+h2, h3 { font-size: 120%; margin: 0; padding: .25em 0 .5em;}
 :not(header h1), h1, h2, h3, h4 {color: #04c; font-weight: bold;}
- /* h4 {color: #000;} */
 aside {
 	float: left;
-	width: 20%;
+	width: 15%;
 	margin: 0;
 	padding: 0 0 0 .5em;
 	border-right: 1px solid #ddd;
@@ -53,24 +37,11 @@ aside ul {
 	margin-left: 0;
 	padding-left: 0;
 }
-aside ul li {
-	padding-bottom: 0.5em;
-}
+aside ul li {padding-bottom: 0.5em;}
 aside p {
 	margin: 0;
 	padding: 0;
 	background-color: none;
-}
-aside a {
-	margin: 0 1.5em;
-	padding: 0 1.5em;
-/*	border-right: none;*/
-	background-color: #04c;
-/*		margin: 0 1em;
-	padding: 0 1em;
-/*	border-right: none;*/
-	background-color: #04c;
-	color: white;
 }
 aside a:hover {color: #c80;}
 p {text-align: center;}
@@ -79,9 +50,6 @@ p {text-align: center;}
 	padding: 0;
 	background-color: none;
 }
-#top a:hover {
-	color: #f00;
-}
 a {font-weight: bold;}
 table {
 	margin: auto;
@@ -89,33 +57,15 @@ table {
 	border-collapse: collapse;
 	width: 95%;
 }
-th {
-	background-color: #00f;
-	color: #fff;
-}
 th, td {
 	border: 1px dashed black;
-/*	padding: .2em .5em .2em .5em;*/
 	vertical-align: center;
 	text-align: center;
 }
-form {
-	margin: 0;
+th {
+	border: 1px solid black;
+	background-color: #00f;
+	color: #fff;
 }
-br {
-	clear: left;
-}
-/* the styles for classes */
-.right {
-	text-align: right;
-}
-.last_paragraph {
-	margin-bottom: 2em;
-}
-.margin_top_increase {
-	margin-top: 1em;
-}
-.external {
-	margin: 0 auto;
-	text-align: center;
-}
+br {clear: left;}
+.right {text-align: right;}
