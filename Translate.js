@@ -158,42 +158,36 @@ $(function(){
 					case 'Dos':
 					case 'Du':
 						var place = '#FPS';
-						// console.log(solutionArray[i]);
 						break;
 					case 'U&scaron;e':
 					case 'U&scaron;uy':
 					case 'Un&scaron;&euml;':
 					case 'U&scaron;o':
 						var place = '#SPS';
-						// console.log(solutionArray[i]);
 						break;
 					case '&Zcaron;&euml;f':
 					case '&Zcaron;&euml;b':
 					case '&Zcaron;uf':
 					case '&Zcaron;ey':
 						var place = '#TPS';
-						// console.log(solutionArray[i]);
 						break;
 					case 'Mon':
 					case 'M&euml;v':
 					case 'Moc':
 					case 'Moq':
 						var place = '#FPP';
-						// console.log(solutionArray[i]);
 						break;
 					case 'Qo':
 					case 'Qu&scaron;':
 					case 'Qo&scaron;':
 					case 'Qu':
 						var place = '#SPP';
-						// console.log(solutionArray[i]);
 						break;
 					case 'Gu':
 					case 'Gub':
 					case 'Goc':
 					case 'Gam':
 						var place = '#TPP';
-						// console.log(solutionArray[i]);
 						break;
 				}
 				
@@ -209,7 +203,6 @@ $(function(){
 					var num = 'td:nth-child(3)';
 				if ( Tenses == 'future' )
 					var num = 'td:nth-child(4)';
-				// console.log('num =',num);
 				var tense = $(this).siblings(num).text();
 				tense = $.trim(tense);
 				if (tense.indexOf('(') >= 0 ) {
@@ -255,66 +248,12 @@ $(function(){
 				solutionArray[i+1] = tense;
 				if (solPunc)
 					solutionArray[i+1] += punc;
-				// console.log(solutionArray);
+				solutionArray.splice(i, 1);
 				solutionVar = solutionArray.join(' ');
-				// console.log(solutionVar);
 				solution = $.trim(solutionVar);
 			});
 		});
-		
-		// $.each(solutionArray, function (i, val) {
-			// $.each(placement, function (place_key, place_val) {
-				// if ( val.toUpperCase() == place_key.toUpperCase() ) {
-					// if (place_val == 'verb') {
-						// switch () {
-							// case 'I':
-							// case 'Me':
-							// case 'Mine':
-							// case 'To_me':
-								// break;
-							// case 'He':
-							// case 'Him':
-							// case 'His':
-							// case 'To_him':
-								// break;
-							// case 'We':
-							// case 'Us':
-							// case 'Ours':
-							// case 'To_us':
-								// break;
-							// case 'They':
-							// case 'Them':
-							// case 'Theirs':
-							// case 'To_them':
-								// // prints the translated word
-								// $( '#'+dict_key.toLowerCase() ).next().html(dict_val);
-								// break;
-								
-							// // checks the dictionary for a form of 'you'
-							// // 'sing--' = singular
-							// // 'plur--' = plural
-							// // '--N' = Nominative
-							// // '--A' = Accusative
-							
-							// case 'singYouN':
-							// case 'singYouA':
-							// case 'singYours':
-							// case 'singToYou':
-								// break;
-							// case 'plurYouN':
-							// case 'plurYouA':
-							// case 'plurYours':
-							// case 'plurToYou':
-								// // prints the translated word
-								// $( '#'+dict_key ).next().html(dict_val);
-								// break;
-						// }
-					// }
-					
-				// }
-			// });
-		// });
-		
+
 		var html = $.parseHTML( solution );
 		var divC = $('#div').children('p');
 		$('#div').children('p').html(solution)/*.text()*/;
