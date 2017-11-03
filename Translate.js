@@ -268,12 +268,12 @@ $(function(){
 					var textFind = txt.indexOf(' i ')+1;
 				else if (txt.indexOf(' I ') >= 0)
 					var textFind = txt.indexOf(' I ')+1;
-				var english = txt.charAt(0).toUpperCase();
-				english += txt.slice(1, textFind).toLowerCase();
-				english += txt.charAt(textFind).toUpperCase();
-				english += txt.slice(textFind + 1).toLowerCase();
+				var english = txt.charAt(0).toUpperCase()
+						+ txt.slice(1, textFind).toLowerCase()
+						+ txt.charAt(textFind).toUpperCase()
+						+ txt.slice(textFind + 1).toLowerCase();
 				$('#eng_text').val(english);
-				// return english;
+				return english;
 
 				// } else if (txt.indexOf(' i') >= 0 || txt.indexOf(' I') >= 0) {
 				// if (txt.indexOf(' i') >= 0)
@@ -288,7 +288,7 @@ $(function(){
 					// english += txt.charAt(textFind).toUpperCase();
 					// english += txt.slice(textFind + 1).toLowerCase();
 					// $('#eng_text').val(english);
-					// // return english;
+					// return english;
 					
 				// } else if (textFind == (txt.length-1)) {
 					// var textFind = txt.length-1;
