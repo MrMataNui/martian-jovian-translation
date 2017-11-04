@@ -1,11 +1,20 @@
 /* the styles for the html elements */
-body {margin: 0 auto;}
+
+html {margin: auto;
+	background-image: url('general_background.png');
+	background-attachment: fixed;}
+body {width: 80%; margin: 0 auto;}
+body main, body aside {font-family: serif;
+	margin: auto;
+	border: double black;
+	background-color: #bbb;}
 main {
 	margin: 2em auto 0;
 	float: right;
 	width: 80%;
 	padding-bottom: 1.5em;
 	border-left: 1px solid #ddd;
+	margin-top: 50px;
 }
 footer {
 	clear: both;
@@ -22,11 +31,25 @@ footer p {
 	margin: 0;
 	padding: .5em 0 .25em;
 }
+header {margin: 0;
+	border-bottom: 2px solid black;}
+header h1 {margin: 0;
+	padding: .5em 0;
+	color: black;
+	font-family: serif;
+	font-weight: none;}
 h2, h3 { font-size: 120%; margin: 0; padding: .25em 0 .5em;}
+h1, h2 {text-align: center; font-family: 'Black Ops One', serif, cursive;}
+h1, h2, h3, h4 {text-align: center;}
+h1 {color: #821583;}
+h2 {color: #A569BD; font-family: 'Audiowide', serif, cursive;}
+h3 {color: #152283; font-family: 'Fugaz One', serif, cursive;}
+h4 {color: #5f71fb; font-family: 'Fugaz One', serif, cursive;}
 :not(header h1), h1, h2, h3, h4 {color: #04c; font-weight: bold;}
 aside {
+	position: fixed;
 	float: left;
-	width: 15%;
+	width: 16%;
 	margin: 0;
 	padding: 0 0 0 .5em;
 	border-right: 1px solid #ddd;
@@ -51,6 +74,13 @@ p {text-align: center;}
 	background-color: none;
 }
 a {font-weight: bold;}
+table, th, td {border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+	vertical-align: center;
+	border-spacing: 5px;
+	font-family: serif;}
+th {background-color: #4CAF50; color: white; border: 1px solid black;}
 table {
 	margin: auto;
 	border: 1px solid black;
@@ -69,3 +99,4 @@ th {
 }
 br {clear: left;}
 .right {text-align: right;}
+.backward {display: inline-block;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);transform: scale(-1, 1);}

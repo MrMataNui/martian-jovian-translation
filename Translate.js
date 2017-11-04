@@ -90,10 +90,15 @@ $(function(){
 					} else if (split_val == 'TO HIM' || split_val == 'TO HER' || split_val == 'TO IT') {
 						solutionVar += dict['To_him'] + ' ';
 						return false;
+					} else if (split_val == 'COLOR') {
+						solutionVar += dict['Colour'] + ' ';
+						return false;
 					}
 					if (split_val == 'DID')
 						Tenses = 'past';
 					else if (split_val == 'DO')
+						Tenses = 'present';
+					else if (split_val == 'DOES')
 						Tenses = 'present';
 					else if (split_val == 'WILL')
 						Tenses = 'future';
@@ -256,7 +261,7 @@ $(function(){
 
 		var html = $.parseHTML( solution );
 		var divC = $('#div').children('p');
-		$('#div').children('p').html(solution)/*.text()*/;
+		$('#div').children('p').html(solution);
 		$('#div').children('p').text(function(_, txt) {
 			return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
 		});
