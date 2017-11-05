@@ -18,22 +18,23 @@ $(function(){
 		var solutionVar = '';
 		var Tenses = '';
 		
+		// checks if there is a punctuation at the end
 		$.each(split_text, function (i, split_val) {
 			$.each(punctuation, function (j, punct_val) {
+				// checks if personal pronoun contains 'to' (to me, to you, to them ... )
 				if (split_val == 'TO') {
 					$.each(toWho, function (k, value) {
-						if (split_text[i+1] == toWho[k] && split_text[i+1] != '') {
+						if ( split_text[i+1] == toWho[k] ) {
 							split_text[i] += ' '+split_text[i+1];
 							split_text[i+1] = '';
 							return false;
-						} else if (split_text[i+1] == toWho[k]+punct_val && split_text[i+1] != '') {
+						} else if ( split_text[i+1] == toWho[k] + punct_val ) {
 							split_text[i] += ' '+split_text[i+1];
 							split_text[i+1] = '';
 							return false;
 						}
 					});
 				}
-				// console.log(stringPunc);
 				if (split_text[i].indexOf(punct_val) >= 0) {
 					stringPunc[i] = split_val;
 					stringPunc[i] = stringPunc[i].split(punct_val);
@@ -46,7 +47,6 @@ $(function(){
 				}
 			});
 		});
-		// console.log(split_text);
 
 		function punctu (solutionVar, dict, key) {
 			solutionVar += dict[key];
@@ -55,50 +55,54 @@ $(function(){
 			return solutionVar;
 		}
 		var nouns = {To_me: 'TO ME', /*To_him: ['TO HIM', 'TO HER', 'TO IT'],*/ To_us: 'TO US', To_them: 'TO THEM'}
+		// translates each word
 		$.each(split_text, function (i, split_val) {
 			$.each(dict, function (dict_key, dict_val) {
 					var upperKey = dict_key.toUpperCase();
 					if (stringPunc[i]) {
-						if (split_val == (upperKey + punc) ) {
-							solutionVar = punctu (solutionVar, dict, dict_key);
-							return false;
-						}
-						else if (split_val == ('YOU' + punc) ) {
-							solutionVar = punctu (solutionVar, dict, 'singYouN');
-							return false;
-						}
-						else if (split_val == ('TO YOU' + punc) ) {
-							solutionVar = punctu (solutionVar, dict, 'singToYou');
-							return false;
-						}
-						else if (split_val == 'TO HIM' + punc
-									|| split_val == 'TO HER' + punc
-									|| split_val == 'TO IT' + punc) {
-							solutionVar = punctu (solutionVar, dict, 'To_him');
-							return false;
+						switch (split_val) {
+							case (upperKey + punc):
+								solutionVar = punctu (solutionVar, dict, dict_key);
+								break;
+							case ('YOU' + punc):
+								solutionVar = punctu (solutionVar, dict, 'singYouN');
+								break;
+							case ('TO YOU' + punc):
+								solutionVar = punctu (solutionVar, dict, 'singToYou');
+								break;
+							case 'COLOR':
+								solutionVar = punctu (solutionVar, dict, 'Colour');
+								break;
+							case ('TO HIM' + punc):
+							case ('TO HER' + punc):
+							case ('TO IT' + punc):
+								solutionVar = punctu (solutionVar, dict, 'To_him');
 						}
 						return;
-					} else if (split_val == upperKey) {
-						solutionVar += dict[dict_key] + ' ';
-						return false;
-					} else if (split_val == 'YOU') {
-						solutionVar += dict['singYouN'] + ' ';
-						return false;
-					} else if (split_val == 'TO YOU') {
-						solutionVar += dict['singToYou'] + ' ';
-						return false;
-					} else if (split_val == 'TO HIM' || split_val == 'TO HER' || split_val == 'TO IT') {
-						solutionVar += dict['To_him'] + ' ';
-						return false;
-					} else if (split_val == 'COLOR') {
-						solutionVar += dict['Colour'] + ' ';
-						return false;
+					} else {
+						switch (split_val) {
+							case upperKey:
+								solutionVar += dict[dict_key] + ' ';
+								break;
+							case 'YOU':
+								solutionVar += dict['singYouN'] + ' ';
+								break;
+							case 'TO YOU':
+								solutionVar += dict['singToYou'] + ' ';
+								break;
+							case 'COLOR':
+								solutionVar += dict['Colour'] + ' ';
+								break;
+							case 'TO HIM':
+							case 'TO HER':
+							case 'TO IT':
+								solutionVar += dict['To_him'] + ' ';
+						}
 					}
+					// checks for the tense
 					if (split_val == 'DID')
 						Tenses = 'past';
-					else if (split_val == 'DO')
-						Tenses = 'present';
-					else if (split_val == 'DOES')
+					else if (split_val == 'DO' || split_val == 'DOES')
 						Tenses = 'present';
 					else if (split_val == 'WILL')
 						Tenses = 'future';
@@ -126,6 +130,7 @@ $(function(){
 		// console.log(solutionArray);
 		
 		var set = '';
+		// removes the words 'will' and 'do'
 		$.each(solutionArray, function (i, val) {
 			$.each(dict, function (dict_key, dict_val) {
 				if (dict_key == 'Will' && val == dict_val)
@@ -134,18 +139,18 @@ $(function(){
 					solutionArray.splice(i, 1);
 			});
 		});
+		// adds the parts of speech to placementArray
 		$.each(solutionArray, function (i, val) {
 			$.each(dict, function (dict_key, dict_val) {
-				// console.log( val.toUpperCase() == 'GECU' + punc );
 				if ( val.toUpperCase() == dict_val.toUpperCase() + punc 
 					|| val.toUpperCase() == dict_val.toUpperCase() ) {
-					$.each(placement, function (place_key, place_val) {
+					$.each(wordPlacement, function (place_key, place_val) {
 						if ( dict_key.toUpperCase() == place_key.toUpperCase() ) {
 							placementArray[i] = place_val;
 						}
 					});
 				} else if ( val.toUpperCase() == dict_val.toUpperCase() ) {
-					$.each(placement, function (place_key, place_val) {
+					$.each(wordPlacement, function (place_key, place_val) {
 						if ( dict_key.toUpperCase() == place_key.toUpperCase() ) {
 							placementArray[i] = place_val;
 						}
@@ -153,8 +158,7 @@ $(function(){
 				}
 			});
 		});
-		// console.log(solutionArray);
-		// console.log(placementArray);
+		// checks the parts of speech to see if affixes are neccesary
 		$.each(placementArray, function (i, val) {
 			if ( val == 'pronounP' && placementArray[i+1] == 'verb' ) {
 				switch ( solutionArray[i] ) {
@@ -218,18 +222,16 @@ $(function(){
 					var valToDel = tense.slice(parenthesis, parenthesis2+1);
 					$.each(vowels, function (vowKey, vowVal) {
 						var new_val = vowVal.toLowerCase();
-
 						// checks if letters in parenthesis starts with a vowel
 						if ( tense.charAt(parenthesis+1).toUpperCase() == vowVal ) {
-
 							// checks if the word ends with a vowel
 							$.each(vowels, function (vowKey2, vowVal2) {
 								if ( solutionArray[i+1].slice(-1).toUpperCase() == vowVal2 ) {
 									valToDel = valToDel.replace('(', '');
 									valToDel = valToDel.replace(')', '');
 									tense = tense.replace(valToDel, '');
-									return false;
-								} else if ( solutionArray[i+1].slice(-1).toUpperCase() != vowVal2 ) {
+									// return false;
+								} else {
 									tense = tense.replace('(', '');
 									tense = tense.replace(')', '');
 								}
@@ -259,6 +261,7 @@ $(function(){
 			});
 		});
 
+		// adds the translated text to $('#div')
 		var html = $.parseHTML( solution );
 		var divC = $('#div').children('p');
 		$('#div').children('p').html(solution);
@@ -266,6 +269,7 @@ $(function(){
 			return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
 		});
 
+		// adds the user text to $('#div')
 		$('#div').find('h3').text(user_text);
 		$('#div').find('h3').text(function(_, txt) {
 			if (txt.indexOf(' i ') >= 0 || txt.indexOf(' I ') >= 0) {
