@@ -1,6 +1,6 @@
 $(function(){
 
-
+	// code written by MrMataNui
 	var punctuation = ['!', '.', '?' /*, ';', ':', '"', "'" */ ];
 	var toWho = ['ME','YOU','HIM', 'HER', 'IT', 'US', 'THEM'];
 	var punc;

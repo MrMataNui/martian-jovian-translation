@@ -1,4 +1,5 @@
 $(function(){
+	// code written by MrMataNui
 	$('.article tr td:nth-child(even)').each(function(){
 		if ($(this).text().indexOf('[') >= 0) {
 			var ital_1 = [];
@@ -10,17 +11,15 @@ $(function(){
 			$(this).html(ital_1[0] + italTotal.italics() + ital_2[1]);
 		}
 	});
-	$('	.evenWrap tr td:nth-child(2n+3), \
-		#verbs tr td:not(:nth-child(1)), \
-		#derivMorph tr td:nth-child(2)').each(function(){
-			$(this).wrapInner('<strong><em></em></strong>');
-	});
 	$('	#nounMorph tr:nth-child(even) td, \
 		#verbs tr:nth-child(odd) td').each(function(){
 			$(this).text('('+$(this).text()+')');
 			$(this).wrapInner('<strong><em></em></strong>');
 	});
-	$('	#Pronunciation td:nth-child(1)').each(function(){
+	$('	.evenWrap tr td:nth-child(2n+3), \
+		#verbs tr td:not(:nth-child(1)), \
+		#derivMorph tr td:nth-child(2), \
+		#Pronunciation td:nth-child(1)').each(function(){
 			$(this).wrapInner('<strong><em></em></strong>');
 	});
 });
