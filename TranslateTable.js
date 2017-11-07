@@ -7,7 +7,7 @@ $(function(){
 			var newItal = $(this).text();
 			ital_1 = newItal.split('[');
 			ital_2 = ital_1[1].split(']');
-		var italTotal = '['+ital_2[0]+']';
+			var italTotal = '['+ital_2[0]+']';
 			$(this).html(ital_1[0] + italTotal.italics() + ital_2[1]);
 		}
 	});

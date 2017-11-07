@@ -1,15 +1,14 @@
 $(function(){
 
 	// code written by MrMataNui
-	var punctuation = ['!', '.', '?' /*, ';', ':', '"', "'" */ ];
+	var punctuation = ['!', '.', '?', ',' /*, ';', ':', '"', "'" */ ];
 	var toWho = ['ME','YOU','HIM', 'HER', 'IT', 'US', 'THEM'];
-	var punc;
+	var punc = '';
 
 	$('#eng_text').focus();
 	$('#calculate').click(function(){
 
 		var user_text = $.trim($('#eng_text').val().toUpperCase());
-		// user_text = $.trim(user_text);
 		var split_text = user_text.split(' ');
 
 		var solutionArray = [];
@@ -17,11 +16,12 @@ $(function(){
 		var stringPunc = [];
 		var solutionVar = '';
 		var Tenses = '';
+		var split_letter = [];
 		
 		// checks if there is a punctuation at the end
 		$.each(split_text, function (i, split_val) {
 			$.each(punctuation, function (j, punct_val) {
-				// checks if personal pronoun contains 'to' (to me, to you, to them ... )
+				// checks daitive pronouns
 				if (split_val == 'TO') {
 					$.each(toWho, function (k, value) {
 						if ( split_text[i+1] == toWho[k] ) {
@@ -42,6 +42,7 @@ $(function(){
 					$.each(stringPunc, function (k, value) {
 						if (stringPunc[i][k] != ''){
 							split_val = stringPunc[i][k];
+							return false;
 						}
 					});
 				}
@@ -54,80 +55,87 @@ $(function(){
 			solutionVar += punc;
 			return solutionVar;
 		}
-		var nouns = {To_me: 'TO ME', /*To_him: ['TO HIM', 'TO HER', 'TO IT'],*/ To_us: 'TO US', To_them: 'TO THEM'}
 		// translates each word
 		$.each(split_text, function (i, split_val) {
 			$.each(dict, function (dict_key, dict_val) {
 					var upperKey = dict_key.toUpperCase();
 					if (stringPunc[i]) {
-						switch (split_val) {
-							case (upperKey + punc):
-								solutionVar = punctu (solutionVar, dict, dict_key);
-								break;
-							case ('YOU' + punc):
-								solutionVar = punctu (solutionVar, dict, 'singYouN');
-								break;
-							case ('TO YOU' + punc):
-								solutionVar = punctu (solutionVar, dict, 'singToYou');
-								break;
-							case 'COLOR':
-								solutionVar = punctu (solutionVar, dict, 'Colour');
-								break;
-							case ('TO HIM' + punc):
-							case ('TO HER' + punc):
-							case ('TO IT' + punc):
-								solutionVar = punctu (solutionVar, dict, 'To_him');
+						if ( split_val == (upperKey + punc) ) {
+							solutionVar = punctu (solutionVar, dict, dict_key);
+							return false;
+						} else if ( split_val ==  ('YOU' + punc) ) {
+							solutionVar = punctu (solutionVar, dict, 'singYouN');
+							return false;
+						} else if ( split_val ==  ('TO YOU' + punc) ) {
+							solutionVar = punctu (solutionVar, dict, 'singToYou');
+							return false;
+						} else if ( split_val ==  'COLOR' ) {
+							solutionVar = punctu (solutionVar, dict, 'Colour');
+							return false;
+						} else if ( split_val ==  ('TO HIM' + punc )
+							|| split_val ==  ('TO HER' + punc)
+							|| split_val ==  ('TO IT' + punc) ) {
+							solutionVar = punctu (solutionVar, dict, 'To_him');
+							return false;
+						} else {
+							// checks daitive pronouns
+							var test;
+							$.each(toWho, function (k, value) {
+								if ( split_val == 'TO ' + toWho[k] + punc ) {
+									solutionVar = punctu (solutionVar, dict, 'To_' + toWho[k].toLowerCase() );
+									test = true;
+									return false;
+								}
+							});
+							if (test)
+								return false;
 						}
 						return;
 					} else {
-						switch (split_val) {
-							case upperKey:
-								solutionVar += dict[dict_key] + ' ';
-								break;
-							case 'YOU':
-								solutionVar += dict['singYouN'] + ' ';
-								break;
-							case 'TO YOU':
-								solutionVar += dict['singToYou'] + ' ';
-								break;
-							case 'COLOR':
-								solutionVar += dict['Colour'] + ' ';
-								break;
-							case 'TO HIM':
-							case 'TO HER':
-							case 'TO IT':
-								solutionVar += dict['To_him'] + ' ';
+						if ( split_val == upperKey ) {
+							solutionVar += dict[dict_key] + ' ';
+							return false;
+						} else if ( split_val == 'YOU' ) {
+							solutionVar += dict['singYouN'] + ' ';
+							return false;
+						} else if ( split_val == 'TO YOU' ) {
+							solutionVar += dict['singToYou'] + ' ';
+							return false;
+						} else if ( split_val == 'COLOR' ) {
+							solutionVar += dict['Colour'] + ' ';
+							return false;
+						} else if ( split_val == 'TO HIM' 
+								|| split_val == 'TO HER'
+								|| split_val == 'TO IT') {
+							solutionVar += dict['To_him'] + ' ';
+							return false;
+						} else {
+							// checks daitive pronouns
+							var test;
+							$.each(toWho, function (k, value) {
+								if ( split_val == 'TO ' + toWho[k] ) {
+									solutionVar = punctu (solutionVar, dict, 'To_' + toWho[k].toLowerCase() );
+									test = true;
+									return false;
+								}
+							});
+							if (test)
+								return false;
 						}
 					}
 					// checks for the tense
-					if (split_val == 'DID')
+					if (split_val == 'DID' || split_val == 'HAD')
 						Tenses = 'past';
-					else if (split_val == 'DO' || split_val == 'DOES')
+					else if (split_val == 'DO' || split_val == 'DOES' || split_val == 'HOLD' || split_val == 'HAVE')
 						Tenses = 'present';
-					else if (split_val == 'WILL')
+					else if (split_val == 'WILL' || (split_val + ' ' + split_text[i+1] == 'WILL HAVE') )
 						Tenses = 'future';
 					return;
-			});
-			
-			$.each(nouns, function (noun_key, noun_val) {
-					if (stringPunc[i]) {
-						if (split_val == (noun_val + punc) ) {
-							solutionVar = punctu (solutionVar, dict, noun_key);
-							return false;
-						}
-						return;
-					} else if (split_val == noun_val) {
-					solutionVar += dict[noun_key] + ' ';
-					return false;
-				} else if (split_val)
-					solutionArray[i] = '--';
 			});
 		});
 
 		var solution = $.trim(solutionVar);
-		
 		solutionArray = solution.split(' ');
-		// console.log(solutionArray);
 		
 		var set = '';
 		// removes the words 'will' and 'do'
@@ -263,9 +271,8 @@ $(function(){
 
 		// adds the translated text to $('#div')
 		var html = $.parseHTML( solution );
-		var divC = $('#div').children('p');
-		$('#div').children('p').html(solution);
-		$('#div').children('p').text(function(_, txt) {
+		$('#div').children('p.first').html(solution);
+		$('#div').children('p.first').text(function(_, txt) {
 			return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
 		});
 
@@ -314,7 +321,53 @@ $(function(){
 				return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
 			}
 		});
-		$('#div').find('p').wrapInner('<strong><em></em></strong>');
+
+		var divC = $('#div').children('p.first').html().toUpperCase();
+		split_text = divC.split(' ');
+		$.each(split_text, function (i, split_val) {
+			$.each(punctuation, function (j, punct_val) {
+				if (split_val.indexOf(punct_val) >= 0) {
+					stringPunc[i] = split_val;
+					stringPunc[i] = stringPunc[i].split(punct_val);
+					punc = punct_val;
+					$.each(stringPunc, function (k, value) {
+						if (stringPunc[i][k] != ''){
+							split_text[i] = stringPunc[i][k];
+							return false;
+						}
+					});
+				}
+			});
+			split_letter[i] = split_val.split('');
+		});
+		var letterVal = '';
+		$.each(split_letter, function (i, split_val) {
+			$.each(split_val, function (j, split_val2) {
+				$.each(letters, function (k, letter_val) {
+					if ( split_val[j-1] + split_val2 == 'ŠY' ) {
+						return false;
+					} else if (split_val2 == k) {
+						letterVal += letter_val;
+					} else if (split_val2 == 'Ë') {
+						letterVal += '&#601;';
+						return false;
+					} else if (split_val2 == 'Š' || ( split_val2 + split_val[j+1] == 'ŠY' ) ) {
+						letterVal += '&#643;';
+						return false;
+					} else if (split_val2 == 'Ž') {
+						letterVal += '&#658;';
+						return false;
+					}
+				});
+			});
+			letterVal += ' ';
+		});
+		$('#div').children('p.second').html( '/' + $.trim(letterVal) + '/' );
+		$('#div').children('p.second').text(function(_, txt) {
+			return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+		});
+		$('#div').find('p.first').wrapInner('<strong><em></em></strong>');
+		$('#div').find('p.second').wrapInner('<strong></strong>');
 		$('#eng_text').focus();
 	});
 });

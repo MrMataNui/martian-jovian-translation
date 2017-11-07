@@ -100,3 +100,5 @@ th {
 br {clear: left;}
 .right {text-align: right;}
 .backward {display: inline-block;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);transform: scale(-1, 1);}
+@font-face{font-family: Jovian; src: url('Jovian.ttf'), url('Jovian.eot');}
+.Jovian {font-family: Jovian; font-size: 150%;}
