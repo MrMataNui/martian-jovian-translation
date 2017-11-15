@@ -1,5 +1,4 @@
 /* the styles for the html elements */
-
 html {margin: auto;
 	background-image: url('general_background.png');
 	background-attachment: fixed;}
@@ -66,7 +65,6 @@ aside p {
 	padding: 0;
 	background-color: none;
 }
-aside a:hover {color: #c80;}
 p {text-align: center;}
 #top {
 	margin: 0;
@@ -97,8 +95,14 @@ th {
 	background-color: #00f;
 	color: #fff;
 }
+tr:nth-child(odd) {background-color: #ccc}
+tr:nth-child(even) {background-color: #eee}
+#verbs tr:nth-child(odd) {background-color: #eee}
+#verbs tr:nth-child(even) {background-color: #ccc}
 br {clear: left;}
 .right {text-align: right;}
 .backward {display: inline-block;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);transform: scale(-1, 1);}
 @font-face{font-family: Jovian; src: url('Jovian.ttf'), url('Jovian.eot');}
-.Jovian {font-family: Jovian; font-size: 150%;}
+@font-face{font-family: Martian; src: url('Xeheixw.ttf'), url('Xeheixw.eot'); font-weight: normal; font-style: normal;}
+/* .Jovian {font-family: Jovian; font-size: 150%;} */
+m, .Martian {font-family: Martian; font-size: 125%; font-style: normal;}
