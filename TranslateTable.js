@@ -19,7 +19,7 @@ $(function(){
 	$('	.evenWrap tr td:nth-child(2n+3), \
 		#verbs tr td:not(:nth-child(1)), \
 		#derivMorph tr td:nth-child(2), \
-		#Pronunciation td:nth-child(1)').each(function(){
+		#Pronunciation td:nth-child(1):not(.Martian)').each(function(){
 			$(this).wrapInner('<strong><em></em></strong>');
 	});
 });
