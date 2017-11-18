@@ -1,7 +1,8 @@
-var punctuation = ['!', '.', '?', ',' /*, ';', ':', ''', ''' */ ];
+// code written by MrMataNui
 $(function(){
 
-	// code written by MrMataNui
+	var punctuation = [ '!', '.', '?', ',', ';', ':', '"', "'", '-', '$', '&', '%' ];
+	var punctuationSelf = [ '-', '$', '&', '%' ];
 	var punctuate = [];
 	var toWho = ['ME','YOU','HIM', 'HER', 'IT', 'US', 'THEM'];
 	var punc = '';
@@ -164,6 +165,11 @@ $(function(){
 						return false;
 					}
 					return;
+			});
+			$.each(punctuationSelf, function (punct_key, punct_val) {
+				if ( split_val == punct_val ) {
+					solutionVar += punct_val + ' ';
+				}
 			});
 		});
 
@@ -398,6 +404,34 @@ $(function(){
 					});
 				}
 			});
+			if (split_val == '&AMP;') {
+				if ( dict['And'] ) {
+					var replace = $('#div').children('p.translation').html();
+					$('#div').children('p.translation').html( dict['And'] );
+					split_val = $('#div').children('p.translation').html().toUpperCase();
+					$('#div').children('p.translation').html( replace );
+				} else
+					split_text[i] = '';
+			}
+			if ( split_val == '%' ) {
+				if ( dict['Percent'] ) {
+					var replace = $('#div').children('p.translation').html();
+					$('#div').children('p.translation').html( dict['Percent'] );
+					split_val = $('#div').children('p.translation').html().toUpperCase();
+					$('#div').children('p.translation').html( replace );
+				} else
+					split_text[i] = '';
+			}
+			if ( split_val.slice(-1) == '%' ) {
+				if ( dict['Percent'] ) {
+					var replace = $('#div').children('p.translation').html();
+					$('#div').children('p.translation').html( dict['Percent'] );
+					if ( split_val.slice(-1) == '%' )
+						split_val = split_val.slice(0, -1) + ' ' + $('#div').children('p.translation').html().toUpperCase();
+					$('#div').children('p.translation').html( replace );
+				} else
+					split_text[i] = '';
+			}
 			split_letter[i] = split_val.split('');
 		});
 		
@@ -427,6 +461,8 @@ $(function(){
 					IPA += '&#643;';
 				else if (split_val2 == 'Ž')
 					IPA += '&#658;';
+				else if (split_val2 == ' ')
+					IPA += ' ';
 			});
 			IPA += ' ';
 		});
@@ -450,7 +486,9 @@ $(function(){
 		var MarSplit = $('#div').children('p.Martian').text().split('');
 		$.each(MarSplit, function (i, Mar_val) {
     		$.each(punctuation, function (j, punc_val) {
-    			if (Mar_val == ' ' && MarSplit[i-1] == punc_val ) {
+				if (punc_val == '%')
+					return;
+    			else if (Mar_val == ' ' && MarSplit[i-1] == punc_val ) {
 					MarSplit.splice(i, 1);
     			}
     		});
@@ -554,5 +592,4 @@ $(function(){
         if( $(this).css('font-weight') == 'bold' )
             $(this).css('font-weight', 'normal')
     });
-
 });
