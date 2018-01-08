@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<!-- code written by MrMataNui -->
+
+	<!-- the head section -->
+	<head>
+		<title>Conlang Dictionary</title>
+		<meta charset='utf-8'>
+		<!--Sets the width to adjust to available screen size-->
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<!--Bootstrap Code-->
+		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+		<script src='http://code.jquery.com/jquery-1.8.3.min.js'></script>
+		<script src='userDictionary.js'></script>
+		<!-- <script src='Dictionaries.js'></script> -->
+		<!-- <script src='TranslateTable.js'></script> -->
+		<!-- <script src='Translate.js'></script> -->
+		<script>
+			var qsParm = {};
+			function qs() {
+				var query = window.location.search.substring(1);
+				var parms = query.split('&');
+				for (var i=0; i < parms.length; i++) {
+					var pos = parms[i].indexOf('=');
+					if (pos > 0) {
+						var key = parms[i].substring(0, pos);
+						var val = parms[i].substring(pos + 1);
+						qsParm[ decodeURIComponent(key) ] = decodeURIComponent(val);
+					}
+				}
+			}
+			qs();
+			ConDictionary = qsParm['ConDictionary'].split(',');
+			ConDictCon = [];
+			ConDictEng = [];
+			ConlangDict = [];
+			NewConlangDict = [];
+			$.each(ConDictionary, function(i, ConDict_val) {
+				if (i%2==0)
+					ConDictEng.push(ConDict_val);
+				else
+					ConDictCon.push(ConDict_val);
+			});
+			$.each(ConDictEng, function(i, Dict_val) {
+				ConlangDict[i] = { English: ConDictEng[i], Conlang: ConDictCon[i] }
+				NewConlangDict.push([ ConDictEng[i], ConDictCon[i] ]);
+			});
+			
+			getDict( '', ConlangDict);
+		</script>
+		<link rel='stylesheet' type='text/css' href='Main.css' />
+		<style>
+			/*main {border-left: none; width: 85%; float: none;}*/
+			aside {color: #000;}
+			aside td a {
+				margin: 0;
+				padding: 0;
+				background-color: transparent;
+				color: #000;
+			}
+			aside td a :hover {color: #c60;}
+			header {
+				margin: 0;
+				border-bottom: 2px solid black;
+			}
+			header h1 {
+				margin: 0;
+				padding: .5em 0;
+				color: black;
+				font-family: serif;
+				font-weight: none;
+			}
+			.width {
+				width: 60%;
+				color:black;
+				border:1px solid black;
+			}
+			.number {
+				width: 100%;
+				overflow:auto;
+				text-align: center;
+				padding:10px;
+				margin:auto;
+				border-radius:20px;
+				color:black;
+				font-family: Sans-Serif;
+				display: block;
+			}
+			#data input {
+				float: left;
+				width: 100%;
+				margin-bottom: .5em;
+			}
+		</style>
+	</head>
+
+<!-- the body section -->
+	<body>
+		<aside>
+			<p> &nbsp; </p>
+			<h1><a href='getUserDict.html' id='getUserDict'>Enter Your Dictionary</a></h1>
+			<h2><a id='EngSort'>Sort by English</a></h2>
+			<h2><a id='ConSort'>Sort by Conlang</a></h2>
+			
+			<!-- <h2>Pronunciation</h2>
+			<table id='Pronunciation'>
+				<tr>
+					<th>Conlang</th>
+					<th>Pronunciation</th>
+				</tr>
+			</table>
+			<script>
+				var tr = '';
+				$.each(letterSort, function(i, j) {
+					tr += '<tr>';
+					tr += '<td>' + i + ' ' + i.toLowerCase() + ':</td>';
+					tr += '<td>/' + j + '/</td>';  
+					tr +='</tr>';
+				});
+				$('#Pronunciation').append(tr);
+			</script> -->
+		</aside>
+		<main class='top'>
+			<h1>Conlang Dictionary</h1>
+			<h2 id='ConWordCound'>Conlang Dictionary</h2>
+
+			<script>
+				$('#ConWordCound').text( 'Your conlang has '
+					+ DictEngSort.length
+					+ ' words in it.' );
+				$('#ConWordCound').css({'font-size': '140%'});
+				// console.log(DictEngSort.length);
+			</script>
+			<table id='Dict'>
+				<tr>
+					<th>English</th>
+					<th>Conlang</th>
+				</tr>
+			</table>
+			<script>
+				dicSorter(DictEngSort);
+				
+				var header = '<tr><th>English</th><th>Conlang</th></tr>';
+				function dicSorter (dicSort) {
+					tr = '';
+					$.each(dicSort, function(i, val) {
+						val['English'] = val['English'].replace(/_/g, ' ')
+						val['Conlang'] = val['Conlang'].replace(/_/g, ' ')
+						tr += '<tr>';
+						tr += '<td>' + val['English'] + ':</td>';
+						tr += '<td>' + val['Conlang'] + '</td>';
+						tr +='</tr>';
+					});
+					$('#Dict').append(tr);
+				}
+
+				$(function(){
+					$('#EngSort').click(function(){
+						$('#Dict').empty();
+						$('#Dict').append(header);
+						dicSorter(DictEngSort);
+					});
+					$('#getUserDict').click(function(){
+						window.location = 'getUserDict.html?ConDictionary='+NewConlangDict+'&ConlangDict='+ConlangDict;
+					});
+
+					$('#ConSort').click(function(){
+						$('#Dict').empty();
+						$('#Dict').append(header);
+						dicSorter(DictConSort);
+					});
+				});
+			</script>
+		</main>
+	</body>
+</html>
