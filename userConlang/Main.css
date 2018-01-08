@@ -1,6 +1,6 @@
 /* the styles for the html elements */
 html {margin: auto;
-	background-image: url('general_background.png');
+	background-image: url('../general_background.png');
 	background-attachment: fixed;}
 body {width: 80%; margin: 0 auto;}
 body main, body aside {font-family: serif;
