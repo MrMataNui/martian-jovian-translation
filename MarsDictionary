@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html>
+	<!-- code written by MrMataNui -->
+
+	<!-- the head section -->
+	<head>
+		<title>Martian Dictionary</title>
+		<meta charset='utf-8'>
+		<!--Sets the width to adjust to available screen size-->
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<!--Bootstrap Code-->
+		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+		<script src='http://code.jquery.com/jquery-1.8.3.min.js'></script>
+		<script src='Dictionaries.js'></script>
+		<script>
+			<!-- var keys = Object.keys(MarsLetters); -->
+			var letter_keys = Object.keys(MarsLetters);
+			var letterSort = {};
+			var split_word = [];
+			letter_keys.sort();
+			$.each(letter_keys, function (j, key_val) {
+				$.each(MarsLetters, function (i, letter_val) {
+					if (key_val == i)
+						letterSort[key_val] = letter_val;
+				});
+			});
+			var dictSortEng = [];
+			var dictSortMars = [];
+			var ipaArray = {};
+			var i = 0;
+			$.each(MarsDict, function(Eng, Mars) {
+				split_word[i] = $.trim( Mars.toUpperCase() );
+				i++;
+			});
+			var IPA = '';
+			// transcribes the translated text into IPA
+			ipaArray = wordIPA (split_word, IPA, MarsLetters, MarsVowels, ipaArray, true);
+			<!-- IPA = '/' + $.trim( IPA ) + '/'; -->
+			i = 0;
+			// console.log(ipaArray);
+			$.each(MarsDict, function(Eng, Mars) {
+				if ( Eng == 'singYouN' ) {
+					Eng = 'You_(Singular)';
+				} else if ( Eng == 'plurYouN' ) {
+					Eng = 'You_(Plural)';
+				} else if ( Eng == 'singYour' ) {
+					Eng = 'Your_(Singular)';
+				} else if ( Eng == 'plurToYou' ) {
+					Eng = 'To_You_(Plural)';
+				} else if ( Eng == 'singToYou' ) {
+					Eng = 'To_You_(Singular)';
+				} else if ( Eng == 'plurYour' ) {
+					Eng = 'Your_(Plural)';
+				} else if ( Eng == 'singYours' ) {
+					Eng = 'Yours_(Singular)';
+				} else if ( Eng == 'plurYours' ) {
+					Eng = 'Yours_(Plural)';
+				} else if ( Eng == 'singPersN' ) {
+					Eng = 'A_Person';
+				} else if ( Eng == 'plurPersN' ) {
+					Eng = 'Some_People';
+				} else if ( Eng == 'weExc' ) {
+					Eng = 'We_(Exclusive)';
+				} else if ( Eng == 'weInc' ) {
+					Eng = 'We_(Inclusive)';
+				} else if ( Eng == 'usExc' ) {
+					Eng = 'Us_(Exclusive)';
+				} else if ( Eng == 'usInc' ) {
+					Eng = 'Us_(Inclusive)';
+				} else if ( Eng == 'to_usExc' ) {
+					Eng = 'To_Us_(Exclusive)';
+				} else if ( Eng == 'to_usInc' ) {
+					Eng = 'To_Us_(Inclusive)';
+				} else if ( Eng == 'singPersG' ) {
+					Eng = "A_Person's";
+				} else if ( Eng == 'singPersD' ) {
+					Eng = 'To_A_Person';
+				} else if ( Eng == 'plurPersG' ) {
+					Eng = "Some_People's";
+				} else if ( Eng == 'plurPersD' ) {
+					Eng = 'To_Some_People';
+				}
+				$.each(ipaArray, function(ipaMars, ipa) {
+					if ( ipaMars.toUpperCase() == Mars.toUpperCase() ) {
+						dictSortEng[i] = {English: Eng.replace(/_/g, ' '), Martian:Mars, IPA: ipa };
+						dictSortMars[i] = {English: Eng.replace(/_/g, ' '), Martian:Mars, IPA: ipa };
+					}
+				});
+				i++;
+			});
+			// console.log(dictSortEng);
+
+
+			function SortByMars(a, b){
+			  var aName = a.Martian.toLowerCase();
+			  var bName = b.Martian.toLowerCase(); 
+			  return ( (aName < bName) ? -1 : ( (aName > bName) ? 1 : 0) );
+			}
+
+			dictSortEng.sort(SortByEng);
+			dictSortMars.sort(SortByMars);
+			// console.log(ipaArray);
+	</script>
+		<script src='TranslateTable.js'></script>
+		<script src='Translate.js'></script>
+		<link rel='stylesheet' type='text/css' href='main.css' />
+		<style>
+			/*main {border-left: none; width: 85%; float: none;}*/
+			aside {color: #000;}
+			aside td a {
+				margin: 0;
+				padding: 0;
+				background-color: transparent;
+				color: #000;
+			}
+			aside td a :hover {color: #c60;}
+			header {
+				margin: 0;
+				border-bottom: 2px solid black;
+			}
+			header h1 {
+				margin: 0;
+				padding: .5em 0;
+				color: black;
+				font-family: serif;
+				font-weight: none;
+			}
+			.width {
+				width: 60%;
+				color:black;
+				border:1px solid black;
+			}
+			.number {
+				width: 100%;
+				overflow:auto;
+				text-align: center;
+				padding:10px;
+				margin:auto;
+				border-radius:20px;
+				color:black;
+				font-family: Sans-Serif;
+				display: block;
+			}
+			#data input {
+				float: left;
+				width: 100%;
+				margin-bottom: .5em;
+			}
+		</style>
+	</head>
+
+<!-- the body section -->
+	<body>
+		<aside>
+			<p> &nbsp; </p>
+			<h2><a href='martian.html'>Translator</a></h2>
+			<h2><a id='EngSort'>Sort by English</a></h2>
+			<h2><a id='MarsSort'>Sort by Martian</a></h2>
+			
+			<h2>Pronunciation</h2>
+			<table id='Pronunciation'>
+				<tr>
+					<th>Martian</th>
+					<th>Pronunciation</th>
+				</tr>
+			</table>
+			<script>
+				var tr = '';
+				$.each(letterSort, function (i, j) {
+					tr += '<tr>';
+					tr += '<td><m>' + i.bold() + '</m> (' + i + '):</td>';
+					tr += '<td>/' + j + '/</td>';  
+					tr +='</tr>';
+				});
+				$('#Pronunciation').append(tr);
+			</script>
+		</aside>
+		<main class='top'>
+			<h1>Martian dictionary</h1>
+
+			<!-- <h1>Pronunciation</h1> -->
+			<table id='Dict'>
+				<tr>
+					<th>English</th>
+					<th>Martian</th>
+					<th>Romanization</th>
+					<th>IPA</th>
+				</tr>
+			</table>
+			<script>
+				dicSorter(dictSortEng);
+				
+				var header = '<tr><th>English</th><th>Martian</th><th>Romanization</th><th>IPA</th></tr>';
+				function dicSorter (dicSort) {
+					tr = '';
+					$.each(dicSort, function (i, val) {
+						if ( val['English'] == 'plurYouA'
+							|| val['English'] == 'singYouA'
+							|| val['English'] == 'singPersA'
+							|| val['English'] == 'plurPersA' )
+							return;
+						tr += '<tr>';
+						tr += '<td>' + val['English'] + ':</td>';
+						tr += '<td><m>' + val['Martian'] + '</m></td>';
+						tr += '<td>(' + val['Martian'] + ')</td>';
+						tr += '<td>' + val['IPA'] + '</td>';
+						tr +='</tr>';
+					});
+					$('#Dict').append(tr);
+					// console.log( MarsDict['My'] );
+				}
+
+				$(function(){
+					$('#EngSort').click(function(){
+						$('#Dict').empty();
+						$('#Dict').append(header);
+						dicSorter(dictSortEng);
+					});
+
+					$('#MarsSort').click(function(){
+						$('#Dict').empty();
+						$('#Dict').append(header);
+						dicSorter(dictSortMars);
+					});
+				});
+			</script>
+		</main>
+</html>
