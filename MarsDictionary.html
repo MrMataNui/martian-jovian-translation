@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<!-- code written by MrMataNui -->
@@ -95,6 +94,11 @@
 			// console.log(dictSortEng);
 
 
+			function SortByEng(a, b){
+			  var aName = a.English.toLowerCase();
+			  var bName = b.English.toLowerCase(); 
+			  return ( (aName < bName) ? -1 : ( (aName > bName) ? 1 : 0) );
+			}
 			function SortByMars(a, b){
 			  var aName = a.Martian.toLowerCase();
 			  var bName = b.Martian.toLowerCase(); 
@@ -229,4 +233,5 @@
 				});
 			</script>
 		</main>
+	</body>
 </html>
