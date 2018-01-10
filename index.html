@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<!-- code written by MrMataNui -->
-
 	<!-- the head section -->
 	<head>
 		<title>Jovian Translator</title>
@@ -10,7 +9,6 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<!--Bootstrap Code-->
 		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
-
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 		<script src='http://code.jquery.com/jquery-1.8.3.min.js'></script>
@@ -73,8 +71,7 @@
 			}
 		</style>
 	</head>
-
-<!-- the body section -->
+	<!-- the body section -->
 	<body>
 		<aside>
 			<p> &nbsp; </p>
@@ -103,7 +100,6 @@
 			<h1>Simple Jovian Translator</h1>
 			<h2>Please enter in simple phrases.</h2>
 			<h2>Does not work with contractions.</h2>
-			
 			<div class='number width'>
 				<div id='data'>
 					<label>Enter English text:</label>
@@ -140,7 +136,6 @@
 				</div>
 			</div> -->
 			<p>&nbsp;</p>
-			
 			<table id='nouns' class='evenWrap'>
 				<tr>
 					<th colspan='9' >Personal Pronouns</th>
@@ -510,15 +505,12 @@
 				if (val.indexOf('(') >= 0 ) {
 					var parenthesis = val.indexOf('(');
 					var parenthesis2 = val.indexOf(')');
-
 					// sets valToDel to letters in parenthesis
 					var valToDel = val.slice(parenthesis, parenthesis2+1);
 					$.each(JovVowels, function (vowKey, vowVal) {
 						var new_val = vowVal.toLowerCase();
-
 						// checks if letters in parenthesis starts with a vowel
 						if ( val.charAt(parenthesis+1).toUpperCase() == vowVal ) {
-
 							// console.log(valToDel);
 							// checks if the word ends with a vowel
 							$.each(JovVowels, function (vowKey2, vowVal2) {
@@ -533,10 +525,8 @@
 						}
 					});
 				}
-
 				// adds the affix to the word
 				val = val.replace('-', dict_val);
-
 				// capitalises the first letter of the word
 				if ( val.charAt(0) == '&' ) {
 					val = val.charAt(0).toUpperCase()
@@ -570,13 +560,11 @@
 						// prints the translated word
 						$( '#'+dict_key.toLowerCase() ).next().html(dict_val);
 						break;
-						
 					// checks the dictionary for a form of 'you'
 					// 'sing--' = singular
 					// 'plur--' = plural
 					// '--N' = Nominative
 					// '--A' = Accusative
-					
 					case 'singYouN':
 					case 'singYouA':
 					case 'singYours':

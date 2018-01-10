@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<!-- code written by MrMataNui -->
-
 	<!-- the head section -->
 	<head>
 		<title>Martian Dictionary</title>
@@ -10,7 +9,6 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<!--Bootstrap Code-->
 		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
-
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 		<script src='http://code.jquery.com/jquery-1.8.3.min.js'></script>
@@ -92,23 +90,15 @@
 				i++;
 			});
 			// console.log(dictSortEng);
-
-
-			function SortByEng(a, b){
-			  var aName = a.English.toLowerCase();
-			  var bName = b.English.toLowerCase(); 
-			  return ( (aName < bName) ? -1 : ( (aName > bName) ? 1 : 0) );
-			}
 			function SortByMars(a, b){
 			  var aName = a.Martian.toLowerCase();
 			  var bName = b.Martian.toLowerCase(); 
 			  return ( (aName < bName) ? -1 : ( (aName > bName) ? 1 : 0) );
 			}
-
 			dictSortEng.sort(SortByEng);
 			dictSortMars.sort(SortByMars);
 			// console.log(ipaArray);
-	</script>
+		</script>
 		<script src='TranslateTable.js'></script>
 		<script src='Translate.js'></script>
 		<link rel='stylesheet' type='text/css' href='main.css' />
@@ -156,22 +146,15 @@
 			}
 		</style>
 	</head>
-
-<!-- the body section -->
+	<!-- the body section -->
 	<body>
 		<aside>
 			<p> &nbsp; </p>
 			<h2><a href='martian.html'>Translator</a></h2>
 			<h2><a id='EngSort'>Sort by English</a></h2>
 			<h2><a id='MarsSort'>Sort by Martian</a></h2>
-			
 			<h2>Pronunciation</h2>
-			<table id='Pronunciation'>
-				<tr>
-					<th>Martian</th>
-					<th>Pronunciation</th>
-				</tr>
-			</table>
+			<table id='Pronunciation'></table>
 			<script>
 				var tr = '';
 				$.each(letterSort, function (i, j) {
@@ -180,26 +163,17 @@
 					tr += '<td>/' + j + '/</td>';  
 					tr +='</tr>';
 				});
+				$('#Pronunciation').append('<tr><th>Martian</th><th>Pronunciation</th></tr>');
 				$('#Pronunciation').append(tr);
 			</script>
 		</aside>
 		<main class='top'>
 			<h1>Martian dictionary</h1>
-
-			<!-- <h1>Pronunciation</h1> -->
-			<table id='Dict'>
-				<tr>
-					<th>English</th>
-					<th>Martian</th>
-					<th>Romanization</th>
-					<th>IPA</th>
-				</tr>
-			</table>
+			<table id='Dict'></table>
 			<script>
 				dicSorter(dictSortEng);
-				
-				var header = '<tr><th>English</th><th>Martian</th><th>Romanization</th><th>IPA</th></tr>';
 				function dicSorter (dicSort) {
+					$('#Dict').empty();
 					tr = '';
 					$.each(dicSort, function (i, val) {
 						if ( val['English'] == 'plurYouA'
@@ -214,20 +188,14 @@
 						tr += '<td>' + val['IPA'] + '</td>';
 						tr +='</tr>';
 					});
+					$('#Dict').append('<tr><th>English</th><th>Martian</th><th>Romanization</th><th>IPA</th></tr>');
 					$('#Dict').append(tr);
-					// console.log( MarsDict['My'] );
 				}
-
 				$(function(){
 					$('#EngSort').click(function(){
-						$('#Dict').empty();
-						$('#Dict').append(header);
 						dicSorter(dictSortEng);
 					});
-
 					$('#MarsSort').click(function(){
-						$('#Dict').empty();
-						$('#Dict').append(header);
 						dicSorter(dictSortMars);
 					});
 				});

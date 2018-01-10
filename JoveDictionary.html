@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<!-- code written by MrMataNui -->
-
 	<!-- the head section -->
 	<head>
 		<title>Jovian Dictionary</title>
@@ -10,7 +9,6 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<!--Bootstrap Code-->
 		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
-
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 		<script src='http://code.jquery.com/jquery-1.8.3.min.js'></script>
@@ -38,36 +36,30 @@
 			var ipaArray = {};
 			// transcribes the translated text into IPA
 			ipaArray = wordIPA (split_word, IPA, JovLetters, JovVowels, ipaArray, true);
-			<!-- IPA = '/' + $.trim( IPA ) + '/'; -->
 			i = 0;
 			console.log(ipaArray);
 			$.each(JovDict, function(Eng, Jov) {
 				$.each(ipaArray, function(ipaJov, ipa) {
 					if ( ipaJov.toUpperCase() == Jov.toUpperCase() ) {
-						dictSortEng[i] = {English: Eng.replace(/_/g, ' '), Jovian:Jov, IPA: ipa };
-						dictSortJov[i] = {English: Eng.replace(/_/g, ' '), Jovian:Jov, IPA: ipa };
+						dictSortEng[i] = {English: Eng.replace(/_/g, ' '), Jovian:Jov, IPA:ipa };
+						dictSortJov[i] = {English: Eng.replace(/_/g, ' '), Jovian:Jov, IPA:ipa };
 					}
 				});
 				i++;
 			});
-			// console.log(dictSortEng);
-
 			function SortByEng(a, b){
 			  var aName = a.English.toLowerCase();
 			  var bName = b.English.toLowerCase(); 
 			  return ( (aName < bName) ? -1 : ( (aName > bName) ? 1 : 0) );
 			}
-
 			function SortByJov(a, b){
 			  var aName = a.Jovian.toLowerCase();
 			  var bName = b.Jovian.toLowerCase(); 
 			  return ( (aName < bName) ? -1 : ( (aName > bName) ? 1 : 0) );
 			}
-
 			dictSortEng.sort(SortByEng);
 			dictSortJov.sort(SortByJov);
-			// console.log(ipaArray);
-	</script>
+		</script>
 		<script src='TranslateTable.js'></script>
 		<script src='Translate.js'></script>
 		<link rel='stylesheet' type='text/css' href='main.css' />
@@ -115,22 +107,16 @@
 			}
 		</style>
 	</head>
-
-<!-- the body section -->
+	<!-- the body section -->
 	<body>
 		<aside>
 			<p> &nbsp; </p>
 			<h2><a href='index.html'>Translator</a></h2>
 			<h2><a id='EngSort'>Sort by English</a></h2>
 			<h2><a id='JovSort'>Sort by Jovian</a></h2>
-			
+			<!-- Jovian Letters -->
 			<h2>Pronunciation</h2>
-			<table id='Pronunciation'>
-				<tr>
-					<th>Jovian</th>
-					<th>Pronunciation</th>
-				</tr>
-			</table>
+			<table id='Pronunciation'></table>
 			<script>
 				var tr = '';
 				$.each(letterSort, function (i, j) {
@@ -139,47 +125,34 @@
 					tr += '<td>/' + j + '/</td>';  
 					tr +='</tr>';
 				});
+				$('#Pronunciation').append('<tr><th>Jovian</th><th>Pronunciation</th></tr>');
 				$('#Pronunciation').append(tr);
 			</script>
 		</aside>
-		<main class='top'>
+		<main>
 			<h1>Jovian dictionary</h1>
-
-			<!-- <h1>Pronunciation</h1> -->
-			<table id='Dict'>
-				<tr>
-					<th>English</th>
-					<th>Jovian</th>
-					<th>IPA</th>
-				</tr>
-			</table>
+			<table id='Dict'></table>
 			<script>
-				dicSorter(dictSortEng);
-				
-				var header = '<tr><th>English</th><th>Jovian</th><th>IPA</th></tr>';
-				function dicSorter (dicSort) {
+				dictSorter(dictSortEng);
+				function dictSorter(dictSort) {
+					$('#Dict').empty();
 					tr = '';
-					$.each(dicSort, function (i, val) {
+					$.each(dictSort, function (i, val) {
 						tr += '<tr>';
 						tr += '<td>' + val['English'] + ':</td>';
 						tr += '<td>' + val['Jovian'] + '</td>';
 						tr += '<td>' + val['IPA'] + '</td>';
-						tr +='</tr>';
+						tr += '</tr>';
 					});
+					$('#Dict').append('<tr><th>English</th><th>Jovian</th><th>IPA</th></tr>');
 					$('#Dict').append(tr);
 				}
-
 				$(function(){
 					$('#EngSort').click(function(){
-						$('#Dict').empty();
-						$('#Dict').append(header);
-						dicSorter(dictSortEng);
+						dictSorter(dictSortEng);
 					});
-
 					$('#JovSort').click(function(){
-						$('#Dict').empty();
-						$('#Dict').append(header);
-						dicSorter(dictSortJov);
+						dictSorter(dictSortJov);
 					});
 				});
 			</script>

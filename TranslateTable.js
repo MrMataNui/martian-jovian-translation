@@ -1,5 +1,5 @@
+// code written by MrMataNui
 $(function(){
-	// code written by MrMataNui
 	$('.article tr td:nth-child(even)').each(function(){
 		if ($(this).text().indexOf('[') >= 0) {
 			var ital_1 = [];
