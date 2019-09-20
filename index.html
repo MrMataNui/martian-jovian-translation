@@ -8,68 +8,17 @@
 		<!--Sets the width to adjust to available screen size-->
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<!--Bootstrap Code-->
-		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+		<link rel='stylesheet' type='text/css'
+			href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 		<script src='http://code.jquery.com/jquery-1.8.3.min.js'></script>
 		<script src='Dictionaries.js'></script>
 		<script src='TranslateTable.js'></script>
 		<script src='Translate.js'></script>
-		<script>
-			var keys = Object.keys(JovLetters);
-			var letterSort = {};
-			keys.sort();
-			$.each(keys, function (j, key_val) {
-				$.each(JovLetters, function (i, letter_val) {
-					if (key_val == i)
-						letterSort[key_val] = letter_val;
-				});
-			});
-		</script>
+		<script src='index.js'></script>
 		<link rel='stylesheet' type='text/css' href='main.css' />
-		<style>
-			/*main {border-left: none; width: 85%; float: none;}*/
-			aside {color: #000;}
-			aside td a {
-				margin: 0;
-				padding: 0;
-				background-color: transparent;
-				color: #000;
-			}
-			aside td a :hover {color: #c60;}
-			header {
-				margin: 0;
-				border-bottom: 2px solid black;
-			}
-			header h1 {
-				margin: 0;
-				padding: .5em 0;
-				color: black;
-				font-family: serif;
-				font-weight: none;
-			}
-			.width {
-				width: 60%;
-				color:black;
-				border:1px solid black;
-			}
-			.number {
-				width: 100%;
-				overflow:auto;
-				text-align: center;
-				padding:10px;
-				margin:auto;
-				border-radius:20px;
-				color:black;
-				font-family: Sans-Serif;
-				display: block;
-			}
-			#data input {
-				float: left;
-				width: 100%;
-				margin-bottom: .5em;
-			}
-		</style>
+		<link rel='stylesheet' type='text/css' href='index.css' />
 	</head>
 	<!-- the body section -->
 	<body>
@@ -85,16 +34,6 @@
 					<th>Pronunciation</th>
 				</tr>
 			</table>
-		<script>
-			var tr = '';
-			$.each(JovLetters, function (i, j) {
-				tr += '<tr>';
-				tr += '<td>' + i + ' ' + i.toLowerCase() + ':</td>';
-				tr += '<td>/' + j + '/</td>';  
-				tr +='</tr>';
-			});
-			$('#Pronunciation').append(tr);
-		</script>
 		</aside>
 		<main class='top'>
 			<h1>Simple Jovian Translator</h1>
@@ -105,11 +44,11 @@
 					<label>Enter English text:</label>
 					<input type='text' id='eng_text'><br>
 				</div>
-				<input type='submit' class='clear_button' id='calculate' value='calculate' >
+				<input type='submit' class='clear_button' id='calculate' value='calculate'>
 			</div>
 			<div class='number width'>
 				<p></p>
-				<div class = 'div' id = 'div'>
+				<div class='div' id='div'>
 					<h2><strong>Translation</strong></h2>
 					<h3></h3>
 					<!-- <p class='Jovian translation'></p> -->
@@ -138,7 +77,7 @@
 			<p>&nbsp;</p>
 			<table id='nouns' class='evenWrap'>
 				<tr>
-					<th colspan='9' >Personal Pronouns</th>
+					<th colspan='9'>Personal Pronouns</th>
 				</tr>
 				<tr>
 					<th></th>
@@ -150,68 +89,92 @@
 				<tr>
 					<td>First Person Singular</td>
 					<td id='i'>I</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='me'>me</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='mine'>mine</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='to_me'>to me</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 				</tr>
 				<tr>
 					<td>Second Person Singular</td>
 					<td id='singYouN'>you</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='singYouA'>you</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='singYours'>yours</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='singToYou'>to you</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 				</tr>
 				<tr>
 					<td>Third Person Singular</td>
 					<td id='he'>he/she/it</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='him'>him/her/it</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='his'>his/hers/its</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='to_him'>to him/her/it</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 				</tr>
 				<tr>
 					<td>First Person Plural</td>
 					<td id='we'>we</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='us'>us</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='ours'>ours</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='to_us'>to us</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 				</tr>
 				<tr>
 					<td>Second Person Plural</td>
 					<td id='plurYouN'>you</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='plurYouA'>you</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='plurYours'>yours</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='plurToYou'>to you</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 				</tr>
 				<tr>
 					<td>Third Person Plural</td>
 					<td id='they'>they</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='them'>them</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='theirs'>theirs</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 					<td id='to_them'>to them</td>
-<!-- DO NOT EDIT -->	<td></td>
+					<!-- DO NOT EDIT -->
+					<td></td>
 				</tr>
 			</table>
 			<p>&nbsp;</p>
@@ -238,9 +201,12 @@
 					<td>-o</td>
 				</tr>
 				<tr>
-<!-- DO NOT EDIT -->	<td class='Past'></td>
-<!-- DO NOT EDIT -->	<td class='Present'></td>
-<!-- DO NOT EDIT -->	<td class='Future'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Past'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Present'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Future'></td>
 				</tr>
 				<tr>
 					<td rowspan='2' id='SPS'>Second Person Singular</td>
@@ -249,9 +215,12 @@
 					<td>-(o)ma</td>
 				</tr>
 				<tr>
-<!-- DO NOT EDIT -->	<td class='Past'></td>
-<!-- DO NOT EDIT -->	<td class='Present'></td>
-<!-- DO NOT EDIT -->	<td class='Future'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Past'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Present'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Future'></td>
 				</tr>
 				<tr>
 					<td rowspan='2' id='TPS'>Third Person Singular</td>
@@ -260,9 +229,12 @@
 					<td>-(u)&scaron;</td>
 				</tr>
 				<tr>
-<!-- DO NOT EDIT -->	<td class='Past'></td>
-<!-- DO NOT EDIT -->	<td class='Present'></td>
-<!-- DO NOT EDIT -->	<td class='Future'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Past'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Present'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Future'></td>
 				</tr>
 				<tr>
 					<td rowspan='2' id='FPP'>First Person Plural</td>
@@ -271,9 +243,12 @@
 					<td>-(&euml;)v</td>
 				</tr>
 				<tr>
-<!-- DO NOT EDIT -->	<td class='Past'></td>
-<!-- DO NOT EDIT -->	<td class='Present'></td>
-<!-- DO NOT EDIT -->	<td class='Future'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Past'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Present'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Future'></td>
 				</tr>
 				<tr>
 					<td rowspan='2' id='SPP'>Second Person Plural</td>
@@ -282,9 +257,12 @@
 					<td>-(u)d</td>
 				</tr>
 				<tr>
-<!-- DO NOT EDIT -->	<td class='Past'></td>
-<!-- DO NOT EDIT -->	<td class='Present'></td>
-<!-- DO NOT EDIT -->	<td class='Future'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Past'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Present'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Future'></td>
 				</tr>
 				<tr>
 					<td rowspan='2' id='TPP'>Third Person Plural</td>
@@ -293,9 +271,12 @@
 					<td>-a</td>
 				</tr>
 				<tr>
-<!-- DO NOT EDIT -->	<td class='Past'></td>
-<!-- DO NOT EDIT -->	<td class='Present'></td>
-<!-- DO NOT EDIT -->	<td class='Future'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Past'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Present'></td>
+					<!-- DO NOT EDIT -->
+					<td class='Future'></td>
 				</tr>
 			</table>
 			<p>&nbsp;</p>
@@ -401,8 +382,8 @@
 					<td>-(o)j</td>
 				</tr>
 				<tr>
-					<td class='boldIt nounFirst'></td>	<!-- DO NOT EDIT -->
-					<td class='boldIt nounSecond'></td>	<!-- DO NOT EDIT -->
+					<td class='boldIt nounFirst'></td> <!-- DO NOT EDIT -->
+					<td class='boldIt nounSecond'></td> <!-- DO NOT EDIT -->
 				</tr>
 				<tr>
 					<td rowspan='2'>Accusative</td>
@@ -412,8 +393,8 @@
 					<td>-(e)v</td>
 				</tr>
 				<tr>
-					<td class='boldIt nounFirst'></td>	<!-- DO NOT EDIT -->
-					<td class='boldIt nounSecond'></td>	<!-- DO NOT EDIT -->
+					<td class='boldIt nounFirst'></td> <!-- DO NOT EDIT -->
+					<td class='boldIt nounSecond'></td> <!-- DO NOT EDIT -->
 				</tr>
 				<tr>
 					<td rowspan='2'>Genitive</td>
@@ -423,8 +404,8 @@
 					<td>-(i)y</td>
 				</tr>
 				<tr>
-					<td class='boldIt nounFirst'></td>	<!-- DO NOT EDIT -->
-					<td class='boldIt nounSecond'></td>	<!-- DO NOT EDIT -->
+					<td class='boldIt nounFirst'></td> <!-- DO NOT EDIT -->
+					<td class='boldIt nounSecond'></td> <!-- DO NOT EDIT -->
 				</tr>
 				<tr>
 					<td rowspan='2'>Dative</td>
@@ -434,8 +415,8 @@
 					<td>-o</td>
 				</tr>
 				<tr>
-					<td class='boldIt nounFirst'></td>	<!-- DO NOT EDIT -->
-					<td class='boldIt nounSecond'></td>	<!-- DO NOT EDIT -->
+					<td class='boldIt nounFirst'></td> <!-- DO NOT EDIT -->
+					<td class='boldIt nounSecond'></td> <!-- DO NOT EDIT -->
 				</tr>
 				<tr>
 					<td rowspan='2'>Locative</td>
@@ -445,8 +426,8 @@
 					<td>-(ai)y</td>
 				</tr>
 				<tr>
-					<td class='boldIt nounFirst'></td>	<!-- DO NOT EDIT -->
-					<td class='boldIt nounSecond'></td>	<!-- DO NOT EDIT -->
+					<td class='boldIt nounFirst'></td> <!-- DO NOT EDIT -->
+					<td class='boldIt nounSecond'></td> <!-- DO NOT EDIT -->
 				</tr>
 			</table>
 			<p>&nbsp;</p>
@@ -497,116 +478,5 @@
 			</table>
 			<p>&nbsp;</p>
 		</main>
-		<script>
-			function findChar (Char, thisVar, dict_val) {
-				// gets the affix
-				var val = thisVar.parent().prev().children('td:nth-child(' + Char + ')').html();
-				var val = $.trim(val);
-				if (val.indexOf('(') >= 0 ) {
-					var parenthesis = val.indexOf('(');
-					var parenthesis2 = val.indexOf(')');
-					// sets valToDel to letters in parenthesis
-					var valToDel = val.slice(parenthesis, parenthesis2+1);
-					$.each(JovVowels, function (vowKey, vowVal) {
-						var new_val = vowVal.toLowerCase();
-						// checks if letters in parenthesis starts with a vowel
-						if ( val.charAt(parenthesis+1).toUpperCase() == vowVal ) {
-							// console.log(valToDel);
-							// checks if the word ends with a vowel
-							$.each(JovVowels, function (vowKey2, vowVal2) {
-								if ( dict_val.slice(-1).toUpperCase() == vowVal2
-									|| dict_val.slice(-6).toLowerCase() == '&euml;' )
-								{ val = val.replace(valToDel, ''); }
-								else {
-									val = val.replace('(', '');
-									val = val.replace(')', '');
-								}
-							});
-						}
-					});
-				}
-				// adds the affix to the word
-				val = val.replace('-', dict_val);
-				// capitalises the first letter of the word
-				if ( val.charAt(0) == '&' ) {
-					val = val.charAt(0).toUpperCase()
-						+ val.charAt(1).toUpperCase()
-						+ val.slice(2).toLowerCase();
-				} else {
-					val = val.charAt(0).toUpperCase()
-						+ val.slice(1).toLowerCase();
-				}
-				thisVar.html( val );
-			}
-			$.each(JovDict, function (dict_key, dict_val) {
-				switch (dict_key) {
-					// checks the dictionary for an English word
-					case 'I':
-					case 'Me':
-					case 'Mine':
-					case 'To_me':
-					case 'He':
-					case 'Him':
-					case 'His':
-					case 'To_him':
-					case 'We':
-					case 'Us':
-					case 'Ours':
-					case 'To_us':
-					case 'They':
-					case 'Them':
-					case 'Theirs':
-					case 'To_them':
-						// prints the translated word
-						$( '#'+dict_key.toLowerCase() ).next().html(dict_val);
-						break;
-					// checks the dictionary for a form of 'you'
-					// 'sing--' = singular
-					// 'plur--' = plural
-					// '--N' = Nominative
-					// '--A' = Accusative
-					case 'singYouN':
-					case 'singYouA':
-					case 'singYours':
-					case 'singToYou':
-					case 'plurYouN':
-					case 'plurYouA':
-					case 'plurYours':
-					case 'plurToYou':
-						// prints the translated word
-						$( '#'+dict_key ).next().html(dict_val);
-						break;
-					case 'Study':
-						$( '#'+dict_key ).children().html( '(' + dict_val + ')' );
-						$( '.Past' ).each(function() {
-							findChar ( 2, $(this), dict_val );
-						});
-						$( '.Present' ).each(function() {
-							findChar ( 3, $(this), dict_val );
-						});
-						$( '.Future' ).each(function() {
-							findChar ( 4, $(this), dict_val );
-						});
-						break;
-					case 'Man':
-						$( '.nounFirst' ).each(function() {
-							findChar ( 3, $(this), dict_val );
-						});
-						$( '.nounSecond' ).each(function() {
-							findChar ( 5, $(this), dict_val );
-						});
-						break;
-				}
-			});
-			$('#eng_text').keypress(function(event){
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-				if(keycode == '13')
-					conlangTranslate(JovDict, JovLetters, JovVowels);
-			});
-			$('#calculate').click(function(){ 
-				conlangTranslate(JovDict, JovLetters, JovVowels);
-			});
-			$('#eng_text').focus();
-		</script>
 	</body>
 </html>

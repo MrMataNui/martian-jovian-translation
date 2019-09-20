@@ -1,0 +1,56 @@
+/*main {border-left: none; width: 85%; float: none;}*/
+aside {
+  color: #000;
+}
+
+aside td a {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #000;
+}
+
+aside td a :hover {
+  color: #c60;
+}
+
+header {
+  margin: 0;
+  border-bottom: 2px solid black;
+}
+
+header h1 {
+  margin: 0;
+  padding: .5em 0;
+  color: black;
+  font-family: serif;
+  font-weight: none;
+}
+
+.width {
+  width: 60%;
+  color: black;
+  border: 1px solid black;
+}
+
+.number {
+  width: 100%;
+  overflow: auto;
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  border-radius: 20px;
+  color: black;
+  font-family: Sans-Serif;
+  display: block;
+}
+
+#dict {
+  width: 100%;
+}
+
+#data input {
+  float: left;
+  width: 100%;
+  margin-bottom: .5em;
+}

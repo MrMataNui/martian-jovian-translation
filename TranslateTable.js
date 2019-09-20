@@ -1,6 +1,6 @@
 // code written by MrMataNui
-$(function(){
-	$('.article tr td:nth-child(even)').each(function(){
+$(() =>{
+	$('.article tr td:nth-child(even)').each(() =>{
 		if ($(this).text().indexOf('[') >= 0) {
 			var ital_1 = [];
 			var ital_2 = [];
@@ -12,14 +12,14 @@ $(function(){
 		}
 	});
 	$('	#nounMorph tr:nth-child(even) td, \
-		#verbs tr:nth-child(odd) td').each(function(){
+		#verbs tr:nth-child(odd) td').each(() =>{
 			$(this).text('('+$(this).text()+')');
 			$(this).wrapInner('<strong><em></em></strong>');
 	});
 	$('	.evenWrap tr td:nth-child(2n+3), \
 		#verbs tr td:not(:nth-child(1)), \
 		#derivMorph tr td:nth-child(2), \
-		#Pronunciation td:nth-child(1):not(.Martian)').each(function(){
+		#Pronunciation td:nth-child(1):not(.Martian)').each(() =>{
 			$(this).wrapInner('<strong><em></em></strong>');
 	});
 });
